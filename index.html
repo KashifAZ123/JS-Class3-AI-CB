@@ -17,16 +17,22 @@
 
             <tr>
                 <td style="border: 1px solid black; padding: 4px;">
-                    <h2 > <input type="text" value="" id="currency-in"></h2>
+                    <input type="text"  id="currency-pkr"> 
                 </td>
                 <td style="border: 1px solid black; padding: 4px;">
-                    $<h3 class="converted"></h3>
+                    <input type="text"  id="currency-us"> 
                 </td>
-
+                <tr>
+                    <td colspan="2"><span id="curr-no"></span></td>
+                </tr>
             </tr>
             <tr >
 
-                <td colspan="2" style="border: 1px solid black; padding: 4px;"> <button>Calculate</button></td>
+                <td colspan="2" style="border: 1px solid black; padding: 4px;"> <button onclick="currency()" type="button">Calculate</button></td>
+            </tr>
+            <tr >
+
+                <td colspan="2" style="border: 1px solid black; padding: 4px;"> <span id="result"></span></td>
             </tr>
             
         </table>
@@ -37,37 +43,94 @@
     <div class="grade-section">
         <table>
             <tr>
-                <td>Enter Your Marks in %</td>
+                <td>Enter Your Marks in %   </td>
                 <td>
-                    <input type="text" value="" id="marks-in">
+                      <input type="text" value="" id="marks-in">
                 </td>
             </tr>
             <br>    
             <tr style="text-align: center;">
-                <td colspan="2"><button>Calculate Grade</button></td>
+                <td colspan="2"><button type="button" onclick="grades()">Calculate Grade</button></td>
             </tr>
 
             <tr style="text-align: center;">
-                <!-- <td colspan="2">You have secured a(n) <span class="grade"></span> Grade</td> -->
-                <td colspan="2"><span class="sch"></span></td>
+                <td colspan="2"><span id="grade"></span></td>
+                
+            </tr>
+            <tr style="text-align: center;">
+                <td colspan="2"><span id="sch"></span></td>
             </tr>
         </table>
 
     </div>
     <br><br>
-    <br><br>
+    <br>
     <div class="should-i-take-the-jacket">
 
         <h2>What's the temperature today??</h2>
-        <table>
+        <table >
+            <tr >
+                <td style="text-align: center;"><input type="text"  id="temp"></td>
+                <td><td><button id="temp" onclick="checkthetemp()">Find</button></td></td>
+            </tr>   
             <tr>
-                <td> <h3><input type="text" name="" id=""></h3></td>
-            </tr>
-            <tr>
-                <td><button class="" onsubmit="">Find</button></td>
+                
             </tr>
         </table>
-
     </div>
+
+
+    <script>
+        
+       
+       
+
+        function currency() {
+            
+            let ustopkr = 170.73
+            let currpk =  Number(document.getElementById("currency-pkr").value);
+            let currus = Number(document.getElementById("currency-us").value);
+            //console.log(currpk,currus);
+            let result;
+           if (currpk > 0 && currus == 0) {
+            result = currpk / ustopkr;
+            document.getElementById("result").innerText = "$ " + result;
+           } else if (currus > 0 && currpk == 0) {
+            result = currus * ustopkr;
+            document.getElementById("result").innerText = "PKR " + result;
+           } else if (currus && currpk) {
+            document.getElementById("result").innerText = "ERROR";
+           }
+           document.getElementById("currency-pkr").value = "";
+           document.getElementById("currency-us").value = "";
+          
+        }
+
+        function grades() {
+            document.getElementById("grade").innerText = "";
+            document.getElementById("sch").innerText = "";
+
+            let marks = Number(document.getElementById("marks-in").value);
+            if (marks <= 100 && marks > 79) {
+                document.getElementById("grade").innerText = "You have secured a(n) A Grade"
+                if (marks >= 90) {
+                    document.getElementById("sch").innerText = "Congo! You got the scholarship"
+                }
+            } else if (marks <= 79 && marks > 69) {
+                document.getElementById("grade").innerText = "You have secured a(n) B Grade"
+            } else if (marks <= 69 && marks > 59) {
+                document.getElementById("grade").innerText = "You have secured a(n) C Grade"
+            } else if (marks <= 59) {
+                document.getElementById("grade").innerText = "You have failed your exam"
+            } else {
+                document.getElementById("grade").innerText = "try again"
+            }
+        }
+
+        function checkthetemp() {
+            let temp = Number(document.getElementById("temp").value);
+            
+        }
+    </script>
 </body>
 </html>
