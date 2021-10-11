@@ -71,10 +71,10 @@
         <table >
             <tr >
                 <td style="text-align: center;"><input type="text"  id="temp"></td>
-                <td><td><button id="temp" onclick="checkthetemp()">Find</button></td></td>
+                <td><td><button id="temp" onclick="checkthetemp()">GO</button></td></td>
             </tr>   
             <tr>
-                
+                <td colspan="2"><span id="tempnow"></span></td>
             </tr>
         </table>
     </div>
@@ -129,8 +129,25 @@
 
         function checkthetemp() {
             let temp = Number(document.getElementById("temp").value);
-            
+            if (temp >= 25 ) {
+                document.getElementById("tempnow").innerText = "Don't take your jacket..";
+            } else if (temp < 25 && temp > 15 ) {
+                document.getElementById("tempnow").innerText = "take your jacket..";
+            } else if (temp <= 15 && temp > 0 ) {
+                document.getElementById("tempnow").innerText = "take your coat..";
+            } else if (temp <= 0) {
+                document.getElementById("tempnow").innerText = "don't go out..";
+            } 
+
+
+
+
+
+            document.getElementById("temp").value = "";
         }
+        // input text has value
+        // header texts has innerText/ innerHTML
+
     </script>
 </body>
 </html>
